@@ -1,0 +1,15 @@
+﻿<Project>
+	<ItemGroup>
+		<TypescriptDefnitionsFiles Include="$(PkgPavel_Zybenkov_TestTypescript_Lib)\content\.generated\**\*.*" />
+		<None Include=".\.frontEndSrc\**\*.*"/>
+		
+		<Content Remove="$(PkgPavel_Zybenkov_TestTypescript_Lib)\contentFiles\any\net6.0\.generated\**\*.*" />
+		<!-- A hack to hide a link to content files-->
+	</ItemGroup>
+	<Target Name="CopyTypescriptDefinitions" AfterTargets="CollectPackageReferences">
+		<!-- CollectPackageReferences is one of design-time build targets-->
+		<Message Text="Copying front-end sources..." />
+		<Copy SourceFiles="@(TypescriptDefnitionsFiles)" DestinationFolder="$(MSBuildProjectDirectory)\.frontEndSrc" SkipUnchangedFiles="true" />
+	</Target>
+
+</Project>
